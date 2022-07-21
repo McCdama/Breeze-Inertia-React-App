@@ -41,4 +41,16 @@ Route::get('/service', function (Service $service) {
     die(get_class($service));
 });
 
+Route::get('/getTask', function () {
+    
+});
+
+Route::post('/task', function () {
+    
+});
+
+Route::delete('/task/{id}', function ($id) {
+    
+});
+
 require __DIR__.'/auth.php';
