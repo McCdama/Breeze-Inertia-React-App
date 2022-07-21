@@ -28,4 +28,17 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+class Service {
+    public function FunctionName(): String
+    {
+        return "OK";
+    }
+}
+
+
+Route::get('/service', function (Service $service) {
+    die(get_class($service));
+});
+
 require __DIR__.'/auth.php';
