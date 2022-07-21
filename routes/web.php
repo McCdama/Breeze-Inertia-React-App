@@ -42,7 +42,7 @@ Route::get('/service', function (Service $service) {
 });
 
 Route::get('/getTask', function () {
-    return Inertia::render('Tasks');
+    return Inertia::render('Tasks', ['test' => 'Theme']);
 });
 
 Route::post('/task', function () {
