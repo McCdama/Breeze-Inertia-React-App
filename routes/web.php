@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,7 +43,11 @@ Route::get('/service', function (Service $service) {
 });
 
 Route::get('/getTask', function () {
-    return Inertia::render('Tasks', ['test' => 'Theme']);
+    $tasks = Task::orderBy('created_at', 'asc')->get();
+    return Inertia::render('Tasks', [
+        'header' => 'Task-App',
+        'tasks' => $tasks
+    ]);
 });
 
 Route::post('/task', function () {
