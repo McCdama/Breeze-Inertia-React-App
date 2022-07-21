@@ -2,7 +2,9 @@
 
 use App\Models\Task;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Validator;
 use Inertia\Inertia;
 
 /*
@@ -50,7 +52,22 @@ Route::get('/getTask', function () {
     ]);
 });
 
-Route::post('/task', function () {
+Route::post('/task', function (Request $request) {
+    $validator = Validator::make($request->call(), [
+        'name' => 'required|max:255'
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/task')
+                ->withInput()
+                ->withErrors($validator);
+    }
+
+    $task = new Task;
+    $task->name = $request->name;
+    $task->save();
+
+    return redirect('/task');
     
 });
 
